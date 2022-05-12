@@ -9,6 +9,7 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-nvm', '~> 0.0.7'
 gem 'capistrano-npm-build'
 ```
 
@@ -34,16 +35,15 @@ or can be run in isolation with `cap production npm:install`
 Configurable options:
 
 ```ruby
-set :npm_target_path, -> { release_path.join('subdir') } # default not set
-set :npm_flags, '--production --silent --no-progress'    # default
+set :npm_flags, '--silent --no-progress'                 # default  (adding --production will failed to run build command)
+set :npm_build_flags, '--modern'                         # default
 set :npm_roles, :all                                     # default
 set :npm_env_variables, {}                               # default
-set :build_command, 'npm run build'                      # default not set. Don't forget to set this.
 ```
 
 ### Dependencies
 
-npm allows for normal `dependencies` and `devDependencies`. By default this gem uses `'--production --silent --no-progress'` as the install flags which will **only** install `dependencies` and skip `devDependencies`. If you want your `devDependencies` installed as well, then remove `--production`.
+npm allows for normal `dependencies` and `devDependencies`. By default this gem uses `'--silent --no-progress'` as the install flags which will install `dependencies` and `devDependencies` too. If you don't want your `devDependencies` installed, then add `--production`.
 
 ## Contributing
 
