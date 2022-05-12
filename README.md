@@ -26,6 +26,7 @@ Or install it yourself as:
 Require in `Capfile` to use the default task:
 
 ```ruby
+require 'capistrano/nvm'
 require 'capistrano/npm_build'
 ```
 
